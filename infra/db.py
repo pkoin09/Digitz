@@ -1,10 +1,19 @@
 import duckdb
+from pathlib import Path
 
-DB_FILE = 'finance.db'
+# Gets the directory where this file lives, then goes up 1 level to the project root
+ROOT_DIR = Path(__file__).parent.parent
+DB_FILE = ROOT_DIR / "data" / "finance.db"
+
+# Ensure the 'data' directory actually exists first
+DB_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+
 def init_db():
     """Initialize the database"""
-    print(f'Initializing database at {DB_FILE}')
-    conn = duckdb.connect(DB_FILE)
+    print(f"Initializing database at {DB_FILE}")
+
+    conn = duckdb.connect(str(DB_FILE))
 
     # 1. Master Entities (The Ground Truth)
     conn.execute("""
@@ -42,11 +51,4 @@ def init_db():
     """)
 
     conn.close()
-
-
-# seed db
-def seed_db():
-    """Seed the database with some data"""
-    conn = duckdb.connect(DB_FILE)
-    conn.execute('INSERT INTO transactions (date, description, amount) VALUES (?, ?, ?)', ('2026-01-01', 'Salary', 1000.00))
-    conn.close()
+    print("Database schema successfully created.")
