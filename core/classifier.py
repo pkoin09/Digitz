@@ -17,6 +17,7 @@ def run_classification_pipeline():
             transaction_id TEXT PRIMARY KEY,
             transaction_date DATE,
             account_name TEXT,
+            raw_description TEXT,
             merchant_name TEXT,
             category TEXT,
             amount DOUBLE,
@@ -27,16 +28,32 @@ def run_classification_pipeline():
 
     # 2. Dynamic classification transformation
     # We use UPPER() and strpos() or LIKE for lightning-fast matching.
+        # 1. Update the table initialization script
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS classified_ledger (
+            transaction_id TEXT PRIMARY KEY,
+            transaction_date DATE,
+            account_name TEXT,
+            raw_description TEXT,  -- <--- ENFORCE THIS
+            merchant_name TEXT,
+            category TEXT,
+            amount DOUBLE,
+            direction TEXT,
+            channel TEXT
+        );
+    """)
+
+    # 2. Update the processing query to stream it from raw_transactions
     conn.execute("""
         INSERT INTO classified_ledger (
             transaction_id, transaction_date, account_name, 
-            merchant_name, category, amount, direction, channel
+            raw_description, merchant_name, category, amount, direction, channel
         )
         SELECT 
             transaction_id,
             transaction_date,
             account_name,
-            -- Determine Clean Merchant Name
+            raw_description,  -- <--- PULL THIS
             CASE 
                 WHEN UPPER(raw_description) LIKE '%SAFEWAY%' THEN 'Safeway'
                 WHEN UPPER(raw_description) LIKE '%COSTCO%' THEN 'Costco'
@@ -48,8 +65,6 @@ def run_classification_pipeline():
                 WHEN UPPER(raw_description) LIKE '%AUTOMATIC PAYMENT%' OR UPPER(raw_description) LIKE '%ONLINE CC PAYMENT%' THEN 'Internal Transfer'
                 ELSE 'UNKNOWN' 
             END AS merchant_name,
-            
-            -- Determine Category based on matched Merchant
             CASE 
                 WHEN UPPER(raw_description) LIKE '%SAFEWAY%' THEN 'Groceries'
                 WHEN UPPER(raw_description) LIKE '%COSTCO%' THEN 'Groceries'
@@ -59,13 +74,10 @@ def run_classification_pipeline():
                 WHEN UPPER(raw_description) LIKE '%UBER EATS%' THEN 'Meals'
                 WHEN UPPER(raw_description) LIKE '%UBER%' THEN 'Transport'
                 WHEN UPPER(raw_description) LIKE '%AUTOMATIC PAYMENT%' OR UPPER(raw_description) LIKE '%ONLINE CC PAYMENT%' THEN 'Transfer'
-                ELSE 'UNCLASSIFIED' -- Target for your AI Tier!
+                ELSE 'UNCLASSIFIED' 
             END AS category,
-            
             amount,
             direction,
-            
-            -- Channel Detection Rule
             CASE 
                 WHEN UPPER(raw_description) LIKE '%ACH%' THEN 'ach'
                 WHEN UPPER(raw_description) LIKE '%VENMO%' OR UPPER(raw_description) LIKE '%PAYPAL%' THEN 'p2p'
