@@ -1,0 +1,11 @@
+Transaction Date,Post Date,Description,Category,Type,Amount,Memo
+06/01/2026,06/02/2026,  SAFEWAY #1928   ,Groceries,Sale,84.23,
+06/03/2026,06/04/2026,mcdonalds,Dining,Sale,11.45,
+06/05/2026,06/06/2026,CHIPOTLE,Dining,Sale,14.87,
+06/07/2026,06/08/2026,AMZN MKTP US*LN391A2,Shopping,Sale,56.99,
+06/09/2026,06/10/2026,SHELL OIL 57443921,Fuel,Sale,42.10,
+06/11/2026,06/12/2026,  netflix.com   ,Entertainment,Sale,15.49,
+06/13/2026,06/14/2026,TARGET T-1849,Shopping,Sale,38.20,online order
+06/15/2026,06/16/2026,AUTOMATIC PAYMENT - THANK YOU,,Adjustment,-500.00,
+06/17/2026,06/18/2026,WALGREENS #4471,Pharmacy,Sale,23.76,
+06/19/2026,06/20/2026,UBER   TRIP,Transport,Sale,18.32,
