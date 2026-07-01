@@ -67,7 +67,8 @@ def verify_results():
     print("=" * 85)
 
     # Fetch all rows as a list of tuples
-    rows = conn.execute("""
+    rows = conn.execute(
+        """
         SELECT 
             t.transaction_date,
             t.raw_description,
@@ -76,7 +77,8 @@ def verify_results():
         FROM raw_transactions t
         LEFT JOIN master_entities e ON t.entity_id = e.entity_id
         ORDER BY t.transaction_date ASC
-    """).fetchall()
+    """
+    ).fetchall()
 
     for row in rows:
         date_str = str(row[0])

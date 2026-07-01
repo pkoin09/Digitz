@@ -16,16 +16,19 @@ def init_db():
     conn = duckdb.connect(str(DB_FILE))
 
     # 1. Master Entities (The Ground Truth)
-    conn.execute("""
+    conn.execute(
+        """
         CREATE TABLE IF NOT EXISTS master_entities (
             entity_id INTEGER PRIMARY KEY,
             clean_name VARCHAR NOT NULL,
             primary_category VARCHAR NOT NULL
         );
-    """)
+    """
+    )
 
     # 2. Merchant Classification Map (The Priority Rules)
-    conn.execute("""
+    conn.execute(
+        """
         CREATE TABLE IF NOT EXISTS merchant_map (
             pattern VARCHAR NOT NULL,
             match_type VARCHAR NOT NULL, -- 'regex' or 'keyword'
@@ -34,10 +37,12 @@ def init_db():
             PRIMARY KEY (pattern),
             FOREIGN KEY (entity_id) REFERENCES master_entities(entity_id)
         );
-    """)
+    """
+    )
 
     # 3. Raw Transactions Table (All statement formats dump here)
-    conn.execute("""
+    conn.execute(
+        """
         CREATE TABLE IF NOT EXISTS raw_transactions (
             transaction_id VARCHAR PRIMARY KEY,
             account_name VARCHAR NOT NULL,
@@ -48,7 +53,8 @@ def init_db():
             direction VARCHAR NOT NULL,    -- 'Expense', 'Income', 'Transfer'
             entity_id INTEGER              -- Populated later via rules/AI
         );
-    """)
+    """
+    )
 
     conn.close()
     print("Database schema successfully created.")
