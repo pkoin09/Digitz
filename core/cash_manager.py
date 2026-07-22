@@ -1,4 +1,5 @@
 import os
+import logging
 import duckdb
 import pandas as pd
 from pathlib import Path
@@ -33,16 +34,16 @@ class CashManager:
                 );
             """)
 
-    def sync_from_csv(self, csv_path: str = "data/cash_overrides.csv"):
+    def sync_from_csv(self, csv_path: str = "data/overrides/cash.csv"):
         """
-        Loads and normalizes cash_overrides.csv into cash_log.
+        Loads and normalizes cash.csv into cash_log.
         """
         if not os.path.exists(csv_path):
-            return
+            raise FileNotFoundError(f"cash.csv not found: {csv_path}")
 
         cash_df = pd.read_csv(csv_path)
         if cash_df.empty:
-            return
+            logging.warning(f"{csv_path} loaded but empty")
 
         # Flexible date parsing -> ISO YYYY-MM-DD
         cash_df["tx_date"] = pd.to_datetime(cash_df["tx_date"], format="mixed").dt.strftime("%Y-%m-%d")

@@ -107,16 +107,8 @@ def compare_months():
 
 
 if __name__ == "__main__":
-    # try:
-    #     # Let's search for "horizon" or whatever strings are in your current seed data to test it
-    #     check_merchant_spend("horizon")
-    #     compare_months()
-    # except Exception as e:
-    #     print(f"Analytics Error: {e}")
-
-    # Inside core/analytics.py (at the very bottom)
     try:
-        check_merchant_spend("DoorDash")  # <-- Updated lookup
+        check_merchant_spend("DoorDash")
         compare_months()
     except Exception as e:
         print(f"Analytics Error: {e}")

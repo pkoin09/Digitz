@@ -10,8 +10,8 @@ def run_pipeline(db_path: str = "data/finance.db"):
     tm = TripManager(db_path=db_path)
     cm = CashManager(db_path=db_path)
 
-    # Sync CSVs into DB
-    cm.sync_from_csv("data/cash_overrides.csv")
+    tm.sync_from_csv("data/overrides/trips.csv")
+    cm.sync_from_csv("data/overrides/cash.csv")
 
     # 2. Build helper views
     tm.create_views()
