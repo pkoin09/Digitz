@@ -8,6 +8,12 @@ dependencies = [
     "black>=26.5.1",
     "duckdb>=1.5.4",
     "google-genai>=2.10.0",
+    "matplotlib>=3.11.0",
     "pandas>=3.0.3",
     "ruff>=0.15.20",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
 ]
