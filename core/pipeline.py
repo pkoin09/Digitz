@@ -1,74 +1,22 @@
-import os
-import duckdb
-import pandas as pd
 from core.trip_manager import TripManager
-
-
-def parse_human_dates(series: pd.Series) -> pd.Series:
-    """Converts mixed human date formats (MM/DD/YYYY, MM-DD-YYYY, YYYY-MM-DD) to ISO string YYYY-MM-DD."""
-    return pd.to_datetime(series, format="mixed").dt.strftime("%Y-%m-%d")
+from core.cash_manager import CashManager
 
 
 def run_pipeline(db_path: str = "data/finance.db"):
     print(f"Executing standalone pipeline sweep against local target: {db_path}")
     print("--- Running Context Sidecar Pipeline ---")
 
+    # 1. Sync sidecar datasets via their dedicated managers
     tm = TripManager(db_path=db_path)
+    cm = CashManager(db_path=db_path)
 
-    with tm.get_connection() as conn:
-        # 1. Load trip.csv into trips table with flexible date parsing
-        trip_csv_path = "data/trip.csv"
-        if os.path.exists(trip_csv_path):
-            trips_df = pd.read_csv(trip_csv_path)
+    # Sync CSVs into DB
+    cm.sync_from_csv("data/cash_overrides.csv")
 
-            # Normalize dates to YYYY-MM-DD
-            trips_df["start_date"] = parse_human_dates(trips_df["start_date"])
-            trips_df["end_date"] = parse_human_dates(trips_df["end_date"])
-
-            for _, row in trips_df.iterrows():
-                tm.add_trip(
-                    trip_id=str(row["trip_id"]),
-                    start_date_str=str(row["start_date"]),
-                    end_date_str=str(row["end_date"]),
-                    trip_type=str(row["trip_type"]),
-                    destination=str(row["destination"]),
-                    notes=str(row.get("notes", "")) if pd.notna(row.get("notes")) else None
-                )
-
-        # 2. Load cash_overrides.csv with flexible date parsing (5 columns)
-        cash_csv_path = "data/cash_overrides.csv"
-        if os.path.exists(cash_csv_path):
-            cash_df = pd.read_csv(cash_csv_path)
-
-            # Normalize tx_date to YYYY-MM-DD
-            cash_df["tx_date"] = parse_human_dates(cash_df["tx_date"])
-
-            conn.execute("""
-                CREATE OR REPLACE TABLE cash_log (
-                    tx_date DATE,
-                    amount DECIMAL(18,2),
-                    override_category VARCHAR,
-                    is_loan BOOLEAN,
-                    notes VARCHAR
-                );
-            """)
-
-            conn.register("cash_df_view", cash_df)
-            conn.execute("""
-                INSERT INTO cash_log 
-                SELECT 
-                    CAST(tx_date AS DATE) AS tx_date, 
-                    CAST(amount AS DECIMAL(18,2)) AS amount, 
-                    override_category, 
-                    CAST(is_loan AS BOOLEAN) AS is_loan, 
-                    notes 
-                FROM cash_df_view;
-            """)
-
-    # 3. Dynamic views compilation
+    # 2. Build helper views
     tm.create_views()
 
-    # 4. Master ledger view build
+    # 3. Build master_ledger view
     with tm.get_connection() as conn:
         print("[Schema Detection] Binding master view against target table 'classified_ledger'")
 
@@ -91,21 +39,6 @@ def run_pipeline(db_path: str = "data/finance.db"):
         """
         conn.execute(master_view_sql)
         print("Intelligent view 'master_ledger' successfully compiled inside database workspace.\n")
-
-        # 5. Output Audit Trace
-        print("[Audit Trace Summary]")
-        summary_df = conn.execute("""
-            SELECT 
-                final_category, 
-                travel_context, 
-                is_account_receivable,
-                COUNT(*) as count
-            FROM master_ledger
-            GROUP BY final_category, travel_context, is_account_receivable
-            ORDER BY count DESC
-            LIMIT 5;
-        """).df()
-        print(summary_df.to_string(index=False))
 
 
 if __name__ == "__main__":

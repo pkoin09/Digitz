@@ -107,6 +107,8 @@ def generate_ai_mappings(client, raw_descriptions, max_retries: int = 5):
 
     for attempt in range(max_retries):
         try:
+            # Proactive delay to keep request rate within Gemini API quotas
+            time.sleep(1.0)
             response = client.models.generate_content(
                 model="gemini-2.5-flash",
                 contents=prompt,
