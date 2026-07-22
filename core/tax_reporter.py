@@ -75,7 +75,7 @@ def generate_tax_report():
         writer.writerows(all_transactions)
 
     print("\n========================================")
-    print(f" Report Saved! Hand this sheet to your tax guy:")
+    print(f" Report Saved! This is just for reference!:")
     print(f" -> {REPORT_FILE.relative_to(ROOT_DIR)}")
     print("========================================\n")
 

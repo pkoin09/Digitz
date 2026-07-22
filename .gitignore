@@ -219,3 +219,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# local db
+*.db
+data/tax_summary_report.csv
+
