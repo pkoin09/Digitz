@@ -1,0 +1,229 @@
+Transaction Date,Clearing Date,Description,Merchant,Category,Type,Amount (USD),Purchased By
+01/03/2026,01/03/2026,NETFLIX.COM,Netflix,Entertainment,Purchase,15.49,John Appleseed
+01/04/2026,01/06/2026,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,41.25,John Appleseed
+01/08/2026,01/09/2026,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,29.09,John Appleseed
+01/08/2026,01/08/2026,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,26.6,John Appleseed
+01/09/2026,01/10/2026,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,33.14,John Appleseed
+01/17/2026,01/18/2026,APPLE.COM/BILL,Apple Services,Entertainment,Purchase,9.99,John Appleseed
+01/19/2026,01/20/2026,DD *WINGSTOP,DoorDash,Restaurants,Purchase,31.55,John Appleseed
+01/23/2026,01/24/2026,DD *WINGSTOP,DoorDash,Restaurants,Purchase,51.93,John Appleseed
+01/24/2026,01/25/2026,AMZN Mktp US*2KDK6C0K,Amazon Marketplace,Shopping,Purchase,161.67,John Appleseed
+01/25/2026,01/26/2026,TARGET 00021842 AUSTIN TX,Target,Shopping,Purchase,60.86,John Appleseed
+01/27/2026,01/27/2026,COSTCO WHOLESALE #1147 AUSTIN TX,COSTCO,Groceries,Purchase,149.28,John Appleseed
+01/28/2026,01/30/2026,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,18.24,John Appleseed
+01/29/2026,01/29/2026,Payment,,,Payment,-848.41,John Appleseed
+01/31/2026,02/02/2026,AMAZON.COM*2AGP6HUE,Amazon Marketplace,Shopping,Purchase,37.1,John Appleseed
+02/03/2026,02/05/2026,NETFLIX.COM,Netflix,Entertainment,Purchase,15.49,John Appleseed
+02/04/2026,02/04/2026,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,42.98,John Appleseed
+02/06/2026,02/08/2026,COSTCO WHSE #1147,Costco,Groceries,Purchase,201.78,John Appleseed
+02/07/2026,02/09/2026,SHELL SERVICE STATION AUSTIN TX,Shell,Transportation,Purchase,50.36,John Appleseed
+02/08/2026,02/08/2026,STARBUCKS STORE #05028,Starbucks,Restaurants,Purchase,5.95,John Appleseed
+02/11/2026,02/12/2026,AMZN Mktp US*2KUHC0OZ,Amazon Marketplace,Shopping,Purchase,17.64,John Appleseed
+02/13/2026,02/14/2026,UBER TRIP 8005928996,Uber,Transportation,Purchase,18.73,John Appleseed
+02/14/2026,02/15/2026,APPLE STORE R432 AUSTIN TX,Apple Store,Shopping,Purchase,80.62,John Appleseed
+02/15/2026,02/17/2026,SQ *STARBUCKS,Starbucks,Restaurants,Purchase,11.76,John Appleseed
+02/16/2026,02/18/2026,SQ *STARBUCKS,Starbucks,Restaurants,Purchase,5.35,John Appleseed
+02/17/2026,02/18/2026,APL*ITUNES.COM/BILL,Apple Services,Entertainment,Purchase,9.99,John Appleseed
+02/19/2026,02/19/2026,MOZART'S COFFEE ROASTER,Local Diner,Restaurants,Purchase,16.02,John Appleseed
+02/19/2026,02/19/2026,UBER TRIP 8005928996,Uber,Transportation,Purchase,8.28,John Appleseed
+02/19/2026,02/21/2026,SHELL SERVICE STATION AUSTIN TX,Shell,Transportation,Purchase,44.4,John Appleseed
+02/24/2026,02/26/2026,TARGET 00021842 AUSTIN TX,Target,Shopping,Purchase,51.75,John Appleseed
+02/28/2026,02/28/2026,WHOLE FOODS MKT #10120,Whole Foods Market,Groceries,Purchase,136.37,John Appleseed
+03/01/2026,03/01/2026,Payment,,,Payment,-666.19,John Appleseed
+03/01/2026,03/03/2026,LYFT *RIDE THU 2PM,Lyft,Transportation,Purchase,10.74,John Appleseed
+03/03/2026,03/04/2026,NETFLIX 118932,Netflix,Entertainment,Purchase,15.49,John Appleseed
+03/03/2026,03/04/2026,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,121.7,John Appleseed
+03/12/2026,03/12/2026,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,91.19,John Appleseed
+03/13/2026,03/14/2026,DOORDASH*COSTCO,Costco (DoorDash),Groceries,Purchase,54.62,John Appleseed
+03/17/2026,03/17/2026,APPLE.COM/BILL,Apple Services,Entertainment,Purchase,9.99,John Appleseed
+03/23/2026,03/23/2026,UBER TRIP 8005928996,Uber,Transportation,Purchase,22.63,John Appleseed
+03/29/2026,03/29/2026,Payment,,,Payment,-717.47,John Appleseed
+03/29/2026,03/29/2026,DD *WINGSTOP,DoorDash,Restaurants,Purchase,35.99,John Appleseed
+03/29/2026,03/29/2026,AMZN Mktp US*2KTTA8IG,Amazon Marketplace,Shopping,Purchase,25.02,John Appleseed
+03/30/2026,03/31/2026,TARGET 00021842 AUSTIN TX,Target,Shopping,Purchase,16.06,John Appleseed
+03/31/2026,04/02/2026,UBER TRIP 8005928996,Uber,Transportation,Purchase,25.3,John Appleseed
+03/31/2026,03/31/2026,COSTCO WHSE #1147,Costco,Groceries,Purchase,108.13,John Appleseed
+04/03/2026,04/04/2026,NETFLIX 118932,Netflix,Entertainment,Purchase,15.49,John Appleseed
+04/09/2026,04/10/2026,SHELL OIL 57443982,Shell,Transportation,Purchase,37.22,John Appleseed
+04/15/2026,04/17/2026,STARBUCKS STORE #05028,Starbucks,Restaurants,Purchase,10.17,John Appleseed
+04/17/2026,04/18/2026,APPLE.COM/BILL,Apple Services,Entertainment,Purchase,9.99,John Appleseed
+04/19/2026,04/20/2026,SQ *STARBUCKS,Starbucks,Restaurants,Purchase,5.27,John Appleseed
+04/19/2026,04/20/2026,UBER TRIP 8005928996,Uber,Transportation,Purchase,27.51,John Appleseed
+04/20/2026,04/20/2026,WHOLE FOODS MKT #10120,Whole Foods Market,Groceries,Purchase,36.76,John Appleseed
+04/20/2026,04/22/2026,UBER *TRIP HELP.UBER.COM,UBER,Transportation,Purchase,21.2,John Appleseed
+04/21/2026,04/22/2026,TARGET 00021842 AUSTIN TX,Target,Shopping,Purchase,71.41,John Appleseed
+04/23/2026,04/25/2026,STARBUCKS STORE #05028,Starbucks,Restaurants,Purchase,11.35,John Appleseed
+04/23/2026,04/23/2026,SHELL OIL 57443982,Shell,Transportation,Purchase,47.4,John Appleseed
+04/29/2026,04/29/2026,Payment,,,Payment,-536.86,John Appleseed
+04/30/2026,05/01/2026,SQ *STARBUCKS,Starbucks,Restaurants,Purchase,10.41,John Appleseed
+05/03/2026,05/03/2026,STARBUCKS STORE #05028,Starbucks,Restaurants,Purchase,11.99,John Appleseed
+05/03/2026,05/05/2026,NETFLIX 118932,NETFLIX,Entertainment,Purchase,15.49,John Appleseed
+05/03/2026,05/05/2026,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,138.42,John Appleseed
+05/04/2026,05/06/2026,COSTCO WHOLESALE #1147 AUSTIN TX,Costco,Groceries,Purchase,163.51,John Appleseed
+05/04/2026,05/04/2026,TARGET 00021842 AUSTIN TX,Target,Shopping,Purchase,55.94,John Appleseed
+05/06/2026,05/07/2026,STARBUCKS STORE #05028,Starbucks,Restaurants,Purchase,10.66,John Appleseed
+05/08/2026,05/08/2026,AMAZON.COM*2AO4Z4U9,Amazon Marketplace,Shopping,Purchase,59.02,John Appleseed
+05/09/2026,05/11/2026,SQ *STARBUCKS,Starbucks,Restaurants,Purchase,11.24,John Appleseed
+05/14/2026,05/15/2026,WHOLEFDS AUS 10120,Whole Foods Market,Groceries,Purchase,61.69,John Appleseed
+05/15/2026,05/17/2026,SHELL OIL 57443982,Shell,Transportation,Purchase,56.65,John Appleseed
+05/17/2026,05/17/2026,APL*ITUNES.COM/BILL,Apple Services,Entertainment,Purchase,9.99,John Appleseed
+05/21/2026,05/23/2026,STARBUCKS STORE #05028,Starbucks,Restaurants,Purchase,11.43,John Appleseed
+05/23/2026,05/24/2026,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,64.28,John Appleseed
+05/23/2026,05/23/2026,STARBUCKS 800-782-7282 WA,Starbucks,Restaurants,Purchase,5.8,John Appleseed
+05/23/2026,05/23/2026,DD *WINGSTOP,DoorDash,Restaurants,Purchase,31.59,John Appleseed
+05/26/2026,05/27/2026,STARBUCKS 800-782-7282 WA,Starbucks,Restaurants,Purchase,9.77,John Appleseed
+05/28/2026,05/28/2026,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,11.88,John Appleseed
+05/29/2026,05/29/2026,Payment,,,Payment,-304.18,John Appleseed
+05/29/2026,05/31/2026,COSTCO WHOLESALE #1147 AUSTIN TX,COSTCO,Groceries,Purchase,193.14,John Appleseed
+05/30/2026,05/30/2026,LYFT   RIDE 855-865-9553,Lyft,Transportation,Purchase,26.63,John Appleseed
+06/02/2025,06/04/2025,AMAZON.COM*2AK3OSJS,Amazon Marketplace,Shopping,Purchase,161.1,John Appleseed
+06/02/2026,06/03/2026,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,8.2,John Appleseed
+06/03/2025,06/05/2025,NETFLIX 118932,Netflix,Entertainment,Purchase,15.49,John Appleseed
+06/03/2025,06/03/2025,SQ *JOE'S DINER AUSTIN TX,Local Diner,Restaurants,Purchase,32.38,John Appleseed
+06/03/2026,06/05/2026,NETFLIX 118932,Netflix,Entertainment,Purchase,15.49,John Appleseed
+06/04/2025,06/06/2025,UBER *TRIP HELP.UBER.COM,UBER,Transportation,Purchase,18.1,John Appleseed
+06/04/2026,06/04/2026,COSTCO WHOLESALE #1147 AUSTIN TX,Costco,Groceries,Purchase,168.66,John Appleseed
+06/06/2025,06/07/2025,LYFT *RIDE THU 2PM,Lyft,Transportation,Purchase,31.31,John Appleseed
+06/06/2025,06/06/2025,SQ *STARBUCKS,Starbucks,Restaurants,Purchase,5.3,John Appleseed
+06/06/2026,06/08/2026,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,96.9,John Appleseed
+06/06/2026,06/06/2026,WHOLE FOODS MKT #10120,Whole Foods Market,Groceries,Purchase,38.12,John Appleseed
+06/07/2025,06/08/2025,UBER *TRIP HELP.UBER.COM,UBER,Transportation,Purchase,20.96,John Appleseed
+06/07/2026,06/08/2026,H-E-B #442 AUSTIN TX,H-E-B,Groceries,Purchase,78.55,John Appleseed
+06/08/2026,06/08/2026,HEB #0442,H-E-B,Groceries,Purchase,66.92,John Appleseed
+06/08/2026,06/08/2026,DOORDASH*COSTCO,Costco (DoorDash),Groceries,Purchase,54.39,John Appleseed
+06/10/2026,06/12/2026,WHOLEFDS AUS 10120,Whole Foods Market,Groceries,Purchase,37.96,John Appleseed
+06/12/2025,06/12/2025,AMAZON.COM*2ATBKAG7,Amazon Marketplace,Shopping,Purchase,103.95,John Appleseed
+06/13/2025,06/13/2025,AMZN Mktp US*2K26WWWZ,Amazon Marketplace,Shopping,Purchase,102.02,John Appleseed
+06/13/2026,06/13/2026,SQ *JOE'S DINER AUSTIN TX,Local Diner,Restaurants,Purchase,13.28,John Appleseed
+06/14/2025,06/14/2025,STARBUCKS 800-782-7282 WA,Starbucks,Restaurants,Purchase,4.93,John Appleseed
+06/14/2026,06/14/2026,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,22.4,John Appleseed
+06/16/2025,06/16/2025,AMZN Mktp US*2KYQ1DGB,Amazon Marketplace,Shopping,Purchase,129.83,John Appleseed
+06/16/2025,06/18/2025,STARBUCKS 800-782-7282 WA,Starbucks,Restaurants,Purchase,4.36,John Appleseed
+06/17/2025,06/17/2025,APPLE.COM/BILL,APPLE SERVICES,Entertainment,Purchase,9.99,John Appleseed
+06/17/2026,06/18/2026,APL*ITUNES.COM/BILL,Apple Services,Entertainment,Purchase,9.99,John Appleseed
+06/17/2026,06/17/2026,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,37.98,John Appleseed
+06/19/2026,06/21/2026,H-E-B #442 AUSTIN TX,H-E-B,Groceries,Purchase,119.95,John Appleseed
+06/19/2026,06/20/2026,HEB #0442,H-E-B,Groceries,Purchase,57.01,John Appleseed
+06/20/2026,06/21/2026,COSTCO WHOLESALE #1147 AUSTIN TX,Costco,Groceries,Purchase,203.56,John Appleseed
+06/22/2026,06/22/2026,H-E-B #442 AUSTIN TX,H-E-B,Groceries,Purchase,107.8,John Appleseed
+06/25/2025,06/25/2025,TARGET.COM*8871029,TARGET,Shopping,Purchase,73.58,John Appleseed
+06/26/2025,06/26/2025,AMAZON.COM*2A5GBAUU,Amazon Marketplace,Shopping,Purchase,151.56,John Appleseed
+06/26/2026,06/27/2026,ALBERTSONS-SAFEWAY #2214,SAFEWAY,Groceries,Purchase,87.67,John Appleseed
+06/29/2025,06/29/2025,AMAZON.COM*2AUBE3U7,Amazon Marketplace,Shopping,Purchase,78.65,John Appleseed
+06/29/2025,06/29/2025,STARBUCKS STORE #05028,Starbucks,Restaurants,Purchase,9.86,John Appleseed
+06/29/2026,06/29/2026,SQ *STARBUCKS,Starbucks,Restaurants,Purchase,8.05,John Appleseed
+06/29/2026,06/29/2026,Payment,,,Payment,-949.12,John Appleseed
+07/01/2026,07/03/2026,COSTCO WHOLESALE #1147 AUSTIN TX,Costco,Groceries,Purchase,166.11,John Appleseed
+07/03/2025,07/04/2025,NETFLIX.COM,Netflix,Entertainment,Purchase,15.49,John Appleseed
+07/03/2026,07/03/2026,SQ *STARBUCKS,Starbucks,Restaurants,Purchase,11.01,John Appleseed
+07/03/2026,07/03/2026,NETFLIX.COM,Netflix,Entertainment,Purchase,15.49,John Appleseed
+07/04/2025,07/06/2025,COSTCO WHOLESALE #1147 AUSTIN TX,Costco,Groceries,Purchase,192.03,John Appleseed
+07/07/2025,07/08/2025,AMZN Mktp US*2KCQ6WPA,Amazon Marketplace,Shopping,Purchase,113.42,John Appleseed
+07/09/2025,07/09/2025,STARBUCKS STORE #05028,Starbucks,Restaurants,Purchase,6.05,John Appleseed
+07/09/2026,07/09/2026,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,18.68,John Appleseed
+07/10/2025,07/11/2025,DOORDASH*CHIPOTLE,DOORDASH,Restaurants,Purchase,20.64,John Appleseed
+07/10/2025,07/12/2025,TARGET 00021842 AUSTIN TX,TARGET,Shopping,Purchase,43.2,John Appleseed
+07/11/2025,07/12/2025,MOZART'S COFFEE ROASTER,Local Diner,Restaurants,Purchase,23.17,John Appleseed
+07/12/2025,07/14/2025,TARGET 00021842 AUSTIN TX,Target,Shopping,Purchase,52.78,John Appleseed
+07/12/2025,07/14/2025,STARBUCKS 800-782-7282 WA,Starbucks,Restaurants,Purchase,5.8,John Appleseed
+07/13/2025,07/13/2025,STARBUCKS 800-782-7282 WA,Starbucks,Restaurants,Purchase,10.14,John Appleseed
+07/13/2026,07/13/2026,TARGET 00021842 AUSTIN TX,Target,Shopping,Purchase,68.32,John Appleseed
+07/14/2025,07/16/2025,TARGET 00021842 AUSTIN TX,Target,Shopping,Purchase,91.35,John Appleseed
+07/15/2026,07/15/2026,SQ *STARBUCKS,Starbucks,Restaurants,Purchase,12.25,John Appleseed
+07/16/2025,07/16/2025,STARBUCKS STORE #05028,Starbucks,Restaurants,Purchase,6.67,John Appleseed
+07/17/2025,07/18/2025,APL*ITUNES.COM/BILL,Apple Services,Entertainment,Purchase,9.99,John Appleseed
+07/18/2025,07/20/2025,SQ *STARBUCKS,STARBUCKS,Restaurants,Purchase,9.77,John Appleseed
+07/20/2025,07/21/2025,AMZN Mktp US*2KZAAX3C,AMAZON MARKETPLACE,Shopping,Purchase,57.53,John Appleseed
+07/20/2025,07/21/2025,WHOLE FOODS MKT #10120,Whole Foods Market,Groceries,Purchase,129.97,John Appleseed
+07/20/2025,07/22/2025,STARBUCKS 800-782-7282 WA,Starbucks,Restaurants,Purchase,9.2,John Appleseed
+07/25/2025,07/27/2025,SHELL SERVICE STATION AUSTIN TX,Shell,Transportation,Purchase,45.49,John Appleseed
+07/29/2025,07/30/2025,HEB #0442,H-E-B,Groceries,Purchase,69.62,John Appleseed
+07/29/2025,07/29/2025,Payment,,,Payment,-953.37,John Appleseed
+07/30/2025,07/30/2025,TARGET.COM*8871029,Target,Shopping,Purchase,63.8,John Appleseed
+08/02/2025,08/04/2025,SAFEWAY #2214,Safeway,Groceries,Purchase,36.4,John Appleseed
+08/03/2025,08/04/2025,APPLE STORE R432 AUSTIN TX,Apple Store,Shopping,Purchase,176.14,John Appleseed
+08/03/2025,08/03/2025,NETFLIX.COM,Netflix,Entertainment,Purchase,15.49,John Appleseed
+08/09/2025,08/09/2025,DOORDASH*PANDA EXPRESS,DoorDash,Restaurants,Purchase,44.87,John Appleseed
+08/11/2025,08/13/2025,SFW_#22,Safeway,Groceries,Purchase,66.99,John Appleseed
+08/12/2025,08/13/2025,SQ *STARBUCKS,Starbucks,Restaurants,Purchase,12.05,John Appleseed
+08/16/2025,08/18/2025,SAFEWAY STORE 2214 AUSTIN TX,Safeway,Groceries,Purchase,60.4,John Appleseed
+08/17/2025,08/19/2025,APL*ITUNES.COM/BILL,APPLE SERVICES,Entertainment,Purchase,9.99,John Appleseed
+08/24/2025,08/24/2025,SAFEWAY #2214,Safeway,Groceries,Purchase,96.97,John Appleseed
+08/25/2025,08/25/2025,STARBUCKS 800-782-7282 WA,Starbucks,Restaurants,Purchase,10.05,John Appleseed
+08/27/2025,08/27/2025,STARBUCKS 800-782-7282 WA,Starbucks,Restaurants,Purchase,6.99,John Appleseed
+08/28/2025,08/30/2025,AMZN Mktp US*2K3VLP5N,Amazon Marketplace,Shopping,Purchase,115.83,John Appleseed
+08/29/2025,08/29/2025,Payment,,,Payment,-976.11,John Appleseed
+08/30/2025,08/30/2025,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,35.26,John Appleseed
+08/31/2025,08/31/2025,LYFT   RIDE 855-865-9553,Lyft,Transportation,Purchase,28.35,John Appleseed
+09/03/2025,09/05/2025,TARGET.COM*8871029,Target,Shopping,Purchase,41.88,John Appleseed
+09/03/2025,09/03/2025,NETFLIX 118932,Netflix,Entertainment,Purchase,15.49,John Appleseed
+09/06/2025,09/06/2025,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,92.5,John Appleseed
+09/06/2025,09/07/2025,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,54.64,John Appleseed
+09/07/2025,09/09/2025,AMZN Mktp US*2K35UJ43,Amazon Marketplace,Shopping,Purchase,115.8,John Appleseed
+09/07/2025,09/09/2025,UBER TRIP 8005928996,Uber,Transportation,Purchase,19.14,John Appleseed
+09/15/2025,09/16/2025,COSTCO WHSE #1147,Costco,Groceries,Purchase,154.1,John Appleseed
+09/15/2025,09/15/2025,TARGET 00021842 AUSTIN TX,Target,Shopping,Purchase,97.5,John Appleseed
+09/15/2025,09/17/2025,COSTCO WHOLESALE #1147 AUSTIN TX,Costco,Groceries,Purchase,196.57,John Appleseed
+09/16/2025,09/17/2025,AMZN Mktp US*2KLCOZ7V,AMAZON MARKETPLACE,Shopping,Purchase,10.46,John Appleseed
+09/17/2025,09/17/2025,APL*ITUNES.COM/BILL,Apple Services,Entertainment,Purchase,9.99,John Appleseed
+09/22/2025,09/22/2025,COSTCO WHOLESALE #1147 AUSTIN TX,Costco,Groceries,Purchase,154.19,John Appleseed
+09/27/2025,09/29/2025,DOORDASH*PANDA EXPRESS,DoorDash,Restaurants,Purchase,45.04,John Appleseed
+09/29/2025,09/29/2025,Payment,,,Payment,-715.78,John Appleseed
+09/30/2025,10/01/2025,STARBUCKS STORE #05028,STARBUCKS,Restaurants,Purchase,6.17,John Appleseed
+10/03/2025,10/04/2025,STARBUCKS 800-782-7282 WA,Starbucks,Restaurants,Purchase,8.55,John Appleseed
+10/03/2025,10/05/2025,NETFLIX 118932,Netflix,Entertainment,Purchase,15.49,John Appleseed
+10/04/2025,10/05/2025,DOORDASH*PANDA EXPRESS,DoorDash,Restaurants,Purchase,27.56,John Appleseed
+10/06/2025,10/07/2025,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,42.02,John Appleseed
+10/06/2025,10/06/2025,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,29.71,John Appleseed
+10/07/2025,10/07/2025,AMAZON.COM*2ANUOSFB,Amazon Marketplace,Shopping,Purchase,164.55,John Appleseed
+10/13/2025,10/14/2025,COSTCO WHOLESALE #1147 AUSTIN TX,Costco,Groceries,Purchase,207.95,John Appleseed
+10/13/2025,10/14/2025,SQ *STARBUCKS,Starbucks,Restaurants,Purchase,9.47,John Appleseed
+10/17/2025,10/19/2025,APPLE.COM/BILL,Apple Services,Entertainment,Purchase,9.99,John Appleseed
+10/19/2025,10/20/2025,H-E-B #442 AUSTIN TX,H-E-B,Groceries,Purchase,62.63,John Appleseed
+10/27/2025,10/29/2025,STARBUCKS STORE #05028,Starbucks,Restaurants,Purchase,7.1,John Appleseed
+10/29/2025,10/31/2025,COSTCO WHSE #1147,Costco,Groceries,Purchase,80.52,John Appleseed
+10/29/2025,10/29/2025,Payment,,,Payment,-1013.47,John Appleseed
+11/01/2025,11/02/2025,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,41.66,John Appleseed
+11/02/2025,11/04/2025,STARBUCKS 800-782-7282 WA,Starbucks,Restaurants,Purchase,8.26,John Appleseed
+11/03/2025,11/05/2025,NETFLIX.COM,NETFLIX,Entertainment,Purchase,15.49,John Appleseed
+11/04/2025,11/05/2025,WHOLE FOODS MKT #10120,WHOLE FOODS MARKET,Groceries,Purchase,131.36,John Appleseed
+11/05/2025,11/06/2025,TARGET.COM*8871029,Target,Shopping,Purchase,59.15,John Appleseed
+11/06/2025,11/08/2025,WHOLE FOODS MKT #10120,Whole Foods Market,Groceries,Purchase,113.0,John Appleseed
+11/06/2025,11/07/2025,LYFT *RIDE THU 2PM,Lyft,Transportation,Purchase,14.87,John Appleseed
+11/08/2025,11/08/2025,AMZN Mktp US*2KM9NABN,Amazon Marketplace,Shopping,Purchase,119.07,John Appleseed
+11/09/2025,11/09/2025,WHOLE FOODS MKT #10120,Whole Foods Market,Groceries,Purchase,133.88,John Appleseed
+11/09/2025,11/11/2025,DOORDASH*CHIPOTLE,DoorDash,Restaurants,Purchase,47.07,John Appleseed
+11/13/2025,11/14/2025,STARBUCKS 800-782-7282 WA,Starbucks,Restaurants,Purchase,7.53,John Appleseed
+11/17/2025,11/17/2025,STARBUCKS STORE #05028,Starbucks,Restaurants,Purchase,10.08,John Appleseed
+11/17/2025,11/17/2025,APPLE.COM/BILL,Apple Services,Entertainment,Purchase,9.99,John Appleseed
+11/20/2025,11/22/2025,AMAZON.COM*2ALID7SG,AMAZON MARKETPLACE,Shopping,Purchase,141.55,John Appleseed
+11/20/2025,11/21/2025,AMAZON.COM*2A89HBJM,Amazon Marketplace,Shopping,Purchase,149.83,John Appleseed
+11/23/2025,11/25/2025,COSTCO WHSE #1147,Costco,Groceries,Purchase,203.14,John Appleseed
+11/29/2025,11/29/2025,Payment,,,Payment,-665.54,John Appleseed
+11/30/2025,11/30/2025,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,16.03,John Appleseed
+11/30/2025,12/01/2025,SHELL SERVICE STATION AUSTIN TX,Shell,Transportation,Purchase,27.78,John Appleseed
+12/01/2025,12/03/2025,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,18.12,John Appleseed
+12/02/2025,12/03/2025,LYFT *RIDE THU 2PM,Lyft,Transportation,Purchase,36.12,John Appleseed
+12/03/2025,12/03/2025,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,92.9,John Appleseed
+12/03/2025,12/04/2025,NETFLIX 118932,Netflix,Entertainment,Purchase,15.49,John Appleseed
+12/04/2025,12/05/2025,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,23.48,John Appleseed
+12/07/2025,12/07/2025,LYFT   RIDE 855-865-9553,Lyft,Transportation,Purchase,14.97,John Appleseed
+12/08/2025,12/10/2025,SHELL OIL 57443982,Shell,Transportation,Purchase,38.0,John Appleseed
+12/15/2025,12/16/2025,SQ *STARBUCKS,Starbucks,Restaurants,Purchase,5.64,John Appleseed
+12/16/2025,12/18/2025,UBER *TRIP HELP.UBER.COM,Uber,Transportation,Purchase,35.26,John Appleseed
+12/17/2025,12/17/2025,APPLE.COM/BILL,Apple Services,Entertainment,Purchase,9.99,John Appleseed
+12/17/2025,12/18/2025,LYFT *RIDE THU 2PM,Lyft,Transportation,Purchase,21.5,John Appleseed
+12/18/2025,12/19/2025,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,37.93,John Appleseed
+12/18/2025,12/19/2025,H-E-B #442 AUSTIN TX,H-E-B,Groceries,Purchase,30.5,John Appleseed
+12/18/2025,12/20/2025,UBER TRIP 8005928996,Uber,Transportation,Purchase,38.1,John Appleseed
+12/19/2025,12/21/2025,STARBUCKS STORE #05028,Starbucks,Restaurants,Purchase,10.67,John Appleseed
+12/20/2025,12/21/2025,DOORDASH*CHIPOTLE,DoorDash,Restaurants,Purchase,49.33,John Appleseed
+12/25/2025,12/27/2025,ALBERTSONS-SAFEWAY #2214,Safeway,Groceries,Purchase,124.97,John Appleseed
+12/25/2025,12/25/2025,AMZN Mktp US*2KQM3RWF,AMAZON MARKETPLACE,Shopping,Purchase,43.58,John Appleseed
+12/26/2025,12/28/2025,SQ *STARBUCKS,Starbucks,Restaurants,Purchase,8.82,John Appleseed
+12/26/2025,12/28/2025,DOORDASH*CHIPOTLE,DoorDash,Restaurants,Purchase,31.8,John Appleseed
+12/26/2025,12/28/2025,WHOLEFDS AUS 10120,Whole Foods Market,Groceries,Purchase,44.91,John Appleseed
+12/27/2025,12/28/2025,AMAZON.COM*2AIAUK2J,Amazon Marketplace,Shopping,Purchase,26.04,John Appleseed
+12/27/2025,12/27/2025,WHOLEFDS AUS 10120,Whole Foods Market,Groceries,Purchase,54.9,John Appleseed
+12/29/2025,12/31/2025,SQ *JOE'S DINER AUSTIN TX,Local Diner,Restaurants,Purchase,35.39,John Appleseed
+12/29/2025,12/29/2025,Payment,,,Payment,-1249.74,John Appleseed
