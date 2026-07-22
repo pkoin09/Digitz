@@ -1,5 +1,3 @@
-import duckdb
-
 import pytest
 import duckdb
 from core.trip_manager import TripManager
@@ -8,7 +6,7 @@ from core.trip_manager import TripManager
 def tm(tmp_path):
     db_file = str(tmp_path / "test_finance.db")
     manager = TripManager(db_path=db_file)
-    
+
     # Setup mock ledger
     with manager.get_connection() as conn:
         conn.execute("""
@@ -31,10 +29,10 @@ def tm(tmp_path):
 def test_trip_manager_flow(tm):
     # Task 1 Test: Date string conversion & insert
     tm.add_trip("TRIP1", "03/14/2026", "03/18/2026", "Business", "NYC", "Work")
-    
+
     # Tasks 2 & 3 Test: Deploy and check views
     tm.create_views()
-    
+
     with tm.get_connection() as conn:
         # Check Task 2 View
         tx3_context = conn.execute(

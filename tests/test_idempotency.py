@@ -1,5 +1,4 @@
 import pytest
-import os
 import pandas as pd
 import duckdb
 from core.pipeline import run_pipeline
@@ -7,11 +6,11 @@ from core.trip_manager import TripManager
 
 @pytest.fixture
 def setup_env(tmp_path, monkeypatch):
-    # Setup temporary directory workspace
     db_file = str(tmp_path / "finance.db")
     data_dir = tmp_path / "data"
-    data_dir.mkdir()
-    
+    overrides_dir = data_dir / "overrides"
+    overrides_dir.mkdir(parents=True)
+
     # Pre-populate classified_ledger table
     conn = duckdb.connect(db_file)
     conn.execute("""
@@ -29,9 +28,8 @@ def setup_env(tmp_path, monkeypatch):
     """)
     conn.close()
 
-    # Create initial CSV sidecars
-    trip_csv = data_dir / "trip.csv"
-    cash_csv = data_dir / "cash_overrides.csv"
+    trip_csv = overrides_dir / "trips.csv"
+    cash_csv = overrides_dir / "cash.csv"
 
     pd.DataFrame([{
         "trip_id": "TRIP_01",
@@ -43,11 +41,13 @@ def setup_env(tmp_path, monkeypatch):
     }]).to_csv(trip_csv, index=False)
 
     pd.DataFrame([{
-        "transaction_id": "tx_200",
-        "is_loan": True
+        "tx_date": "03/16/2026",
+        "amount": -100.00,
+        "override_category": "Cash",
+        "is_loan": True,
+        "notes": "Cash advance"
     }]).to_csv(cash_csv, index=False)
 
-    # Change current working directory to temp workspace during test
     monkeypatch.chdir(tmp_path)
     return db_file, trip_csv, cash_csv
 
@@ -65,9 +65,8 @@ def test_pipeline_itempotency_and_csv_persistence(setup_env):
     assert initial_master == 2
     conn.close()
 
-    # 2. Add new row AND update existing row in trip.csv
+    # 2. Add new row AND update existing row in trips.csv
     updated_trips = [
-        # Modified existing row (Updated destination & dates)
         {
             "trip_id": "TRIP_01",
             "start_date": "03/14/2026",
@@ -76,7 +75,6 @@ def test_pipeline_itempotency_and_csv_persistence(setup_env):
             "destination": "Austin TX",
             "notes": "Extended Conference"
         },
-        # Brand new row
         {
             "trip_id": "TRIP_02",
             "start_date": "04/01/2026",
@@ -95,12 +93,12 @@ def test_pipeline_itempotency_and_csv_persistence(setup_env):
     conn = duckdb.connect(db_file)
     final_trips = conn.execute("SELECT COUNT(*) FROM trips").fetchone()[0]
     trip_1_dest = conn.execute("SELECT destination FROM trips WHERE trip_id = 'TRIP_01'").fetchone()[0]
-    
+
     assert final_trips == 2  # 1 modified + 1 new (no duplicate rows created)
     assert trip_1_dest == "Austin TX"  # Updated in-place safely
-    
-    # Verify master_ledger view correctly references updated dates
+
+    # Verify master_ledger view correctly references updated trip
     travel_context = conn.execute("SELECT travel_context FROM master_ledger WHERE tx_date = '2026-03-15'").fetchone()[0]
     assert travel_context == "Business"
-    
+
     conn.close()
