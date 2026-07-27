@@ -161,6 +161,26 @@ def run_classification_pipeline():
                 WHEN raw_description ILIKE '%NETFLIX%' OR raw_description ILIKE '%HULU%' THEN 'Video Streaming'
                 WHEN raw_description ILIKE '%SPOTIFY%' THEN 'Audio Streaming'
                 WHEN raw_description ILIKE '%SHELL%' OR raw_description ILIKE '%CHEVRON%' OR raw_description ILIKE '%EXXON%' THEN 'Gas'
+
+                -- Merchant-specific sub-categories (refine UNCLASSIFIED entries)
+                WHEN raw_description ILIKE '%STARBUCKS%' THEN 'Coffee Shop'
+                WHEN raw_description ILIKE '%CHIPOTLE%' THEN 'Fast Food'
+                WHEN raw_description ILIKE '%COSTCO%' THEN 'Wholesale Club'
+                WHEN raw_description ILIKE '%SAFEWAY%' OR raw_description ILIKE '%SFW_%' THEN 'Grocery Store'
+                WHEN raw_description ILIKE '%AMAZON%' OR raw_description ILIKE '%AMZN%' THEN 'Online Retail'
+                WHEN raw_description ILIKE '%TARGET%' THEN 'Department Store'
+                WHEN raw_description ILIKE '%APPLE.COM/BILL%' THEN 'Digital Subscription'
+
+                -- Cash & Fees sub-categories
+                WHEN raw_description ILIKE '%ATM WITHDRAWAL%' THEN 'ATM Withdrawal'
+                WHEN raw_description ILIKE '%FINANCE CHARGE%' THEN 'Interest Charge'
+                WHEN raw_description ILIKE '%MAINTENANCE FEE%' THEN 'Bank Fee'
+
+                -- Transfer sub-categories
+                WHEN raw_description ILIKE '%PAYMENT%THANK%YOU%'
+                  OR raw_description ILIKE '%INTERNET%PAYMENT%'
+                  OR raw_description ILIKE '%ONLINE%PAYMENT%'
+                  OR UPPER(raw_description) = 'PAYMENT' THEN 'Credit Card Payment'
                 ELSE 'UNCLASSIFIED'
             END AS sub_category,
             

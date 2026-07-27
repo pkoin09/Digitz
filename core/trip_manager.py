@@ -89,7 +89,14 @@ class TripManager:
                     CASE WHEN t.trip_id IS NOT NULL THEN TRUE ELSE FALSE END AS is_travel_expense
                 FROM classified_ledger l
                 LEFT JOIN trips t
-                    ON CAST(l.transaction_date AS DATE) BETWEEN t.start_date AND t.end_date;
+                    ON CAST(l.transaction_date AS DATE) BETWEEN t.start_date AND t.end_date
+                    -- P2P payments (Zelle, Venmo) can be sent from anywhere,
+                    -- so they don't imply physical presence during a trip.
+                    AND l.sub_category != 'Person to Person Payment'
+                    -- Only travel-relevant categories get trip context.
+                    -- Groceries, subscriptions, shopping, etc. during a trip
+                    -- window are likely home-related, not travel expenses.
+                    AND l.category IN ('Travel', 'Transport', 'Meals', 'Cash')
             """)
             conn.execute("""
                 CREATE OR REPLACE VIEW monthly_burn_summary AS

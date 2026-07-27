@@ -224,3 +224,15 @@ __marimo__/
 *.db
 data/tax_summary_report.csv
 
+# Project-internal / sensitive files (not for version control)
+CLAUDE.md
+context.md
+README.old.md
+progress.yaml
+.python-version
+.pytest_cache/
+.DS_Store
+
+# Local logs (contain AI audit payloads with transaction descriptions)
+logs/
+

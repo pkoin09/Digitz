@@ -30,9 +30,18 @@ def run_pipeline(db_path: str = "data/finance.db"):
             COALESCE(trip.trip_type, 'Personal/Local') AS travel_context, 
             trip.destination AS trip_location, 
             COALESCE(cash.is_loan, CAST('f' AS BOOLEAN)) AS is_account_receivable 
-        FROM classified_ledger AS raw 
-        LEFT JOIN trips AS trip 
-            ON (CAST(raw.transaction_date AS DATE) BETWEEN CAST(trip.start_date AS DATE) AND CAST(trip.end_date AS DATE)) 
+        FROM classified_ledger AS raw
+        LEFT JOIN trips AS trip
+            ON (CAST(raw.transaction_date AS DATE) BETWEEN CAST(trip.start_date AS DATE) AND CAST(trip.end_date AS DATE)
+            -- P2P payments (Zelle, Venmo) can be sent from anywhere, so they
+            -- don't imply physical presence during a trip. Exclude them from
+            -- trip matching — only in-person transactions (ATM, POS, etc.)
+            -- get travel context.
+            AND raw.sub_category != 'Person to Person Payment'
+            -- Only travel-relevant categories get trip context.
+            -- Groceries, subscriptions, shopping, etc. during a trip
+            -- window are likely home-related, not travel expenses.
+            AND raw.category IN ('Travel', 'Transport', 'Meals', 'Cash'))
         LEFT JOIN cash_log AS cash 
             ON (CAST(raw.transaction_date AS DATE) = CAST(cash.tx_date AS DATE) 
             AND CAST(raw.amount AS DECIMAL(18,2)) = CAST(cash.amount AS DECIMAL(18,2)));
