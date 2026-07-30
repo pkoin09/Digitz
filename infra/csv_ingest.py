@@ -1,4 +1,3 @@
-# infra/csv_ingest.py
 import csv
 from pathlib import Path
 import duckdb
@@ -135,7 +134,7 @@ def ingest_statement(csv_path: str, account_name: str, account_type: str):
             '{account_name}',
             '{account_type}',
             COALESCE(
-                try_strptime({date_col}::VARCHAR, ['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y', '%m-%d-%Y']),
+                try_strptime({date_col}::VARCHAR, ['%Y-%m-%d', '%Y/%m/%d', '%m/%d/%Y', '%m/%d/%y', '%m-%d-%Y']),
                 TRY_CAST({date_col} AS DATE)
             ) AS transaction_date,
             {desc_col},

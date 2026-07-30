@@ -45,6 +45,8 @@ uv run python -m core.pipeline
 
 This syncs both override CSVs into DuckDB and (re)builds the `ledger_with_trips`, `monthly_burn_summary`, and `master_ledger` views.
 
+> **Date formats.** Dat columns in the override CSVs are flexible — the parser accepts `M/D/YYYY` (`3/15/2026`), `M/D/YY` (`3/15/26`), `YYYY-MM-DD` (`2026-03-15`), and `YYYY/MM/DD` (`2026/03/15`). Everything is normalized to ISO `YYYY-MM-DD` on the way into DuckDB, so the stored format is always the same regardless of how you typed it. The same applies to the bank statement CSVs ingested via `csv_ingest.py` (it falls back to `TRY_CAST` for anything else it recognizes).
+
 ## v) Tax and Coverage Report
 
 ```sh

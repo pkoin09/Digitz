@@ -30,7 +30,7 @@ class TripManager:
             """)
 
     def _parse_date(self, date_str: str) -> str:
-        for fmt in ("%m/%d/%Y", "%Y-%m-%d"):
+        for fmt in ("%m/%d/%Y", "%m/%d/%y", "%Y-%m-%d", "%Y/%m/%d"):
             try:
                 return datetime.strptime(date_str, fmt).date().isoformat()
             except ValueError:
