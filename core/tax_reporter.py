@@ -1,4 +1,3 @@
-# core/tax_reporter.py
 import duckdb
 import csv
 from pathlib import Path

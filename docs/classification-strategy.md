@@ -40,6 +40,62 @@ Rules run top-down, most specific first, so a general rule never accidentally sw
 
 Running things in this order is what keeps the classification reliable while still leaving room to add new vendors or transaction types later without breaking existing rules.
 
+## Adding a New Classification Rule
+
+The sample data won't cover every merchant you use, so here's how to teach Digitz about a new one. All Tier 1 rules live in a single `CASE` statement inside `core/classifier.py`. Each transaction is classified along **four axes** — you need a `WHEN` clause in each:
+
+| Axis | What it sets | Example for "Amazon Prime Video" |
+|---|---|---|
+| `merchant_name` | The clean entity name | `'Amazon Prime Video'` |
+| `category` | The broad bucket | `'Subscriptions'` |
+| `sub_category` | The specific grouping | `'Video Streaming'` |
+| `channel` | How it happened | `'online'` |
+
+### Step-by-step: Add "Amazon Prime Video"
+
+1. **Find the description your bank uses.** Check `raw_description` in DuckDB for the unrecognized transaction:
+
+   ```sh
+   duckdb data/finance.db -c "SELECT raw_description FROM raw_transactions WHERE raw_description ILIKE '%PRIME%VIDEO%';"
+   ```
+
+   Typical bank descriptions look like `PRIME VIDEO *1234` or `AMZN PRIME VIDEO`.
+
+2. **Add a `WHEN` clause to each `CASE` block** in `core/classifier.py`. Insert it **above** the general `AMAZON`/`AMZN` catch-all so the more specific rule wins:
+
+   ```python
+   # In the merchant_name CASE — place before the general Amazon rule
+   WHEN raw_description ILIKE '%PRIME%VIDEO%' THEN 'Amazon Prime Video'
+
+   # In the category CASE — under Subscriptions
+   WHEN raw_description ILIKE '%PRIME%VIDEO%' THEN 'Subscriptions'
+
+   # In the sub_category CASE — under Video Streaming
+   WHEN raw_description ILIKE '%PRIME%VIDEO%' THEN 'Video Streaming'
+
+   # In the channel CASE — under online
+   WHEN raw_description ILIKE '%PRIME%VIDEO%' THEN 'online'
+   ```
+
+3. **Re-run classification** (no need to re-ingest — the `ON CONFLICT DO UPDATE` re-applies rules to existing rows):
+
+   ```sh
+   uv run python -m core.classifier
+   ```
+
+4. **Verify:**
+
+   ```sh
+   duckdb data/finance.db -c "SELECT * FROM classified_ledger WHERE merchant_name = 'Amazon Prime Video';"
+   ```
+
+### Tips
+
+- **Specificity ordering matters.** Rules run top-down, most specific first. Always place a new, narrow rule *above* any broader catch-all it could be swallowed by (e.g. `PRIME VIDEO` before `AMAZON`).
+- **Case-insensitive matching.** All patterns use `ILIKE` (PostgreSQL-style case-insensitive `LIKE`), so `%PRIME%VIDEO%` matches `prime video`, `PRIME VIDEO`, etc.
+- **Don't know the merchant?** Leave it out — anything still tagged `UNCLASSIFIED` gets sent to the Gemini AI tier automatically on the next classification run.
+- **Existing transactions get re-classified.** The pipeline uses `ON CONFLICT DO UPDATE`, so adding or fixing a rule and re-running `core.classifier` updates already-ingested rows in place.
+
 > **Business trips & loans** are handled as a *post-classification sidecar layer*, not as Tier 1 rules. After classification completes, the `core/pipeline.py` sidecar pipeline joins `classified_ledger` with `trips` and `cash_log` to produce the `master_ledger` view. See [Getting Started → Trip & Cash Sidecar Context](getting-started.md) for how to configure trips and manual cash/loan overrides.
 
 ---

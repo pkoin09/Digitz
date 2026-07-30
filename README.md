@@ -6,6 +6,8 @@ Digitz is a private, local-first pipeline that turns messy bank CSV exports into
   - most transactions get classified instantly with SQL rules (fast, deterministic, free).
   - Whatever's left over, gets handed to a language model for a second pass.
 
+Why lean on the SQL tier at all instead of just letting Gemini label everything? A hand-written rule wins on **speed** (instant, no network round-trip), **consistency** (deterministic — the same merchant gets the same label, run after run), **privacy** (the description never leaves your machine), and **reliability** (no dependency on network or API availability). You write a rule for any merchant you see repeatedly; you leave the long tail — the one-offs and the unrecognizable — to the AI. That split is the whole pitch: deterministic where you can, semantic where you must.
+
 ---
 
 ## Contents
@@ -18,6 +20,7 @@ Digitz is a private, local-first pipeline that turns messy bank CSV exports into
    ii. [AI-Powered Semantic Classification](docs/classification-strategy.md)
    iii. [Transaction Schema](docs/classification-strategy.md)
    iv. [Processing Order](docs/classification-strategy.md)
+   v. [Adding a New Classification Rule](docs/classification-strategy.md)
 5. [Getting Started](docs/getting-started.md)
    i. [Prerequisites](docs/getting-started.md)
    ii. [Ingesting Credit Cards](docs/getting-started.md)
@@ -25,7 +28,7 @@ Digitz is a private, local-first pipeline that turns messy bank CSV exports into
    iv. [Trip & Cash Sidecar Context](docs/getting-started.md)
    v. [Tax & Coverage Report](docs/getting-started.md)
 6. [Database Rescue — Undoing Mistakes](docs/database-rescue.md)
-7. [Adding a New Classification Rule](#adding-a-new-classification-rule)
+7. [Database Schema — Tables & Views](docs/db-schema.md)
 8. [SQL & Pandas Cookbook](docs/sql-cookbook.md)
    i. [Quick Previews & Category Summaries](docs/sql-cookbook.md)
    ii. [Pandas & DuckDB Power-Moves](docs/sql-cookbook.md)
@@ -55,8 +58,8 @@ The only thing that ever leaves your machine is an anonymized transaction descri
 
 - **No double-counted transfers.** Card payments, balance clearing, and bank-to-bank transfers get automatically netted into a neutral `Transfer` category, so you don't end up with "income" or expenses counted twice.
 - **Two-tier categorization.** Tier 1 is local SQL doing pattern matching on known merchants — including the annoying masked ones like `SFW_#22`. Tier 2 kicks in only for what's left, sending it to `gemini-2.5-flash` for a human-readable label.
-- **Handles flaky APIs gracefully.** If Gemini throws a `503` or `429`, the retry logic backs off with jitter instead of hammering the endpoint.
-- **Credentials stay out of your shell history.** Keychain on macOS, `.env`/environment variable everywhere else — either way, nothing gets hardcoded.
+- **API Error handling.** If Gemini throws a `503` or `429`, the retry logic backs off with jitter instead of hammering the endpoint.
+- **MacOS API credentials in keychain.** Variables live in the keychain, `.env`/environment variable everywhere else — either way, nothing gets hardcoded.
 - **Nothing gets ingested twice.** Transaction gets an MD5 signature from its date, description, and amount. Re-running an import on the same file hits a wall instead of creating a duplicate mess.
 - **Trips and cash live on the side.** Business trip date ranges and manual cash entries overlay onto the ledger without needing to re-run ingestion — they join into a `master_ledger` view alongside everything else which give the ability to filter business transactions, loans to friends easily.
 - **Smart trip context — category whitelist + P2P excluded.** When you're on a business trip, only travel-relevant categories (`Travel`, `Transport`, `Meals`, `Cash`) get tagged with the trip's context. P2P payments (Zelle, Venmo) are also excluded — you can send money to anyone from anywhere, so they don't imply physical presence during a trip. Groceries, subscriptions, and shopping during a trip window are assumed to be home-related (e.g used instacart for your roomate or family to reeive).
@@ -97,106 +100,9 @@ The only thing that ever leaves your machine is an anonymized transaction descri
 
 ## Examples
 
-### Business Trip Context
-
-When you're on a business trip, in-person transactions automatically get tagged with the trip's context. Edit `data/overrides/trips.csv` to define trip date ranges, then run the sidecar pipeline:
-
-```sh
-uv run python -m core.pipeline
-```
-
-```sql
-SELECT tx_date, merchant_string, amount, travel_context, trip_location
-FROM ledger_with_trips
-WHERE travel_context != 'Personal/Local'
-ORDER BY tx_date;
-```
-
-| tx_date    | merchant_string     | amount | travel_context | trip_location |
-| ---------- | ------------------- | ------ | -------------- | ------------- |
-| 2026-03-16 | LYFT \*RIDE THU 2PM | -31.17 | Business       | San Francisco |
-| 2026-03-17 | TACO BELL 1234      | -18.42 | Business       | San Francisco |
-| 2026-03-18 | WALMART ATM         | -60.00 | Business       | San Francisco |
-
-> **Category whitelist:** Only `Travel`, `Transport`, `Meals`, and `Cash` categories get trip context. Subscriptions, groceries, and shopping during a trip are assumed to be home-related. **P2P excluded:** Zelle/Venmo payments during a trip do _not_ get travel context — you can send money from anywhere, so they don't imply physical presence.
-
-### Loan Tracking
-
-Manual cash/loan overrides live in `data/overrides/cash.csv` and surface in the `master_ledger` view via the `is_account_receivable` flag:
-
-```csv
-tx_date,amount,override_category,is_loan,notes
-03/06/2026,-73.98,Roommate Split Loan,TRUE,Temporary loan for utility split
-```
-
-```sql
-SELECT tx_date, merchant_string, amount, final_category, is_account_receivable
-FROM master_ledger
-WHERE is_account_receivable = TRUE;
-```
-
-| tx_date    | merchant_string | amount | final_category | is_account_receivable |
-| ---------- | --------------- | ------ | -------------- | --------------------- |
-| 2026-03-06 | Roommate Split  | -73.98 | Transfer       | TRUE                  |
+- **Business trip tagging** — when you're on a trip, in-person transactions auto-tag with the trip's context in the `master_ledger` / `ledger_with_trips` views. See the ready-to-run queries and sample output in the [SQL Cookbook → Trip Context](docs/sql-cookbook.md) and [Business Trip Expenses](docs/sql-cookbook.md).
+- **Loan tracking** — manual cash/loan overrides from `data/overrides/cash.csv` surface in `master_ledger` via the `is_account_receivable` flag. See the worked example in the [SQL Cookbook → Loan Tracking](docs/sql-cookbook.md).
 
 ---
 
-## Adding a New Classification Rule
-
-> **Why add a manual rule instead of letting Gemini handle it?** Even with a prepaid Gemini plan, a SQL rule wins on **speed** (instant vs. a network round-trip), **consistency** (deterministic — the same merchant always gets the same label, run after run), **privacy** (the description never leaves your machine), and **reliability** (no dependency on network or API availability). Add a rule for any merchant you see repeatedly; leave the long tail to the AI.
-
-The sample data won't cover every merchant you use, so here's how to teach Digitz about a new one. All Tier 1 rules live in a single `CASE` statement inside `core/classifier.py`. Each transaction is classified along **four axes** — you need a `WHEN` clause in each:
-
-| Axis | What it sets | Example for "Amazon Prime Video" |
-|---|---|---|
-| `merchant_name` | The clean entity name | `'Amazon Prime Video'` |
-| `category` | The broad bucket | `'Subscriptions'` |
-| `sub_category` | The specific grouping | `'Video Streaming'` |
-| `channel` | How it happened | `'online'` |
-
-### Step-by-step: Add "Amazon Prime Video"
-
-1. **Find the description your bank uses.** Check `raw_description` in DuckDB for the unrecognized transaction:
-
-   ```sh
-   duckdb data/finance.db -c "SELECT raw_description FROM raw_transactions WHERE raw_description ILIKE '%PRIME%VIDEO%';"
-   ```
-
-   Typical bank descriptions look like `PRIME VIDEO *1234` or `AMZN PRIME VIDEO`.
-
-2. **Add a `WHEN` clause to each `CASE` block** in `core/classifier.py`. Insert it **above** the general `AMAZON`/`AMZN` catch-all so the more specific rule wins:
-
-   ```python
-   # In the merchant_name CASE — place before the general Amazon rule
-   WHEN raw_description ILIKE '%PRIME%VIDEO%' THEN 'Amazon Prime Video'
-
-   # In the category CASE — under Subscriptions
-   WHEN raw_description ILIKE '%PRIME%VIDEO%' THEN 'Subscriptions'
-
-   # In the sub_category CASE — under Video Streaming
-   WHEN raw_description ILIKE '%PRIME%VIDEO%' THEN 'Video Streaming'
-
-   # In the channel CASE — under online
-   WHEN raw_description ILIKE '%PRIME%VIDEO%' THEN 'online'
-   ```
-
-3. **Re-run classification** (no need to re-ingest — the `ON CONFLICT DO UPDATE` re-applies rules to existing rows):
-
-   ```sh
-   uv run python -m core.classifier
-   ```
-
-4. **Verify:**
-
-   ```sh
-   duckdb data/finance.db -c "SELECT * FROM classified_ledger WHERE merchant_name = 'Amazon Prime Video';"
-   ```
-
-### Tips
-
-- **Specificity ordering matters.** Rules run top-down, most specific first. Always place a new, narrow rule *above* any broader catch-all it could be swallowed by (e.g. `PRIME VIDEO` before `AMAZON`).
-- **Case-insensitive matching.** All patterns use `ILIKE` (PostgreSQL-style case-insensitive `LIKE`), so `%PRIME%VIDEO%` matches `prime video`, `PRIME VIDEO`, etc.
-- **Don't know the merchant?** Leave it out — anything still tagged `UNCLASSIFIED` gets sent to the Gemini AI tier automatically on the next classification run.
-- **Existing transactions get re-classified.** The pipeline uses `ON CONFLICT DO UPDATE`, so adding or fixing a rule and re-running `core.classifier` updates already-ingested rows in place.
-
-For the deeper dives — how classification actually decides what's what, step-by-step setup, fixing a bad import, and a pile of ready-to-run SQL/pandas snippets — see the [Contents](#contents) above.
+For the deeper dives — how classification actually decides what's what, teaching it a new merchant, step-by-step setup, fixing a bad import, and a pile of ready-to-run SQL/pandas snippets — see the [Contents](#contents) above.

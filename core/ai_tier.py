@@ -1,4 +1,3 @@
-# core/ai_tier.py
 import os
 import json
 import time

@@ -1,4 +1,3 @@
-#core/analytics.py
 import duckdb
 import pandas as pd
 import matplotlib.pyplot as plt
