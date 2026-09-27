@@ -2,6 +2,12 @@
 
 Digitz is a private, local-first pipeline that turns messy bank CSV exports into clean ledgers. I built it as a simple way to overcome the 'how much did i spend on ... ?' questions that pop up before tax time, take it with a grain of salt as i dont know uncle sam's lingo & mathematics. It's built on **DuckDB** for the heavy lifting and **Gemini AI** for the stuff that plain string matching can't figure out. Everything runs on your machine (more on the Gemini part later) — nothing gets uploaded to a third-party aggregator, and no bank credentials ever leave your laptop.
 
+## Video Demo
+
+[![Watch the Digitz demo on YouTube](https://img.youtube.com/vi/FtqR6BcV7IY/maxresdefault.jpg)](https://youtube.com/watch?v=FtqR6BcV7IY)
+
+[Watch the Digitz demo on YouTube](https://youtube.com/watch?v=FtqR6BcV7IY)
+
 - The short version of how it works, Two tiers:
   - most transactions get classified instantly with SQL rules (fast, deterministic, free).
   - Whatever's left over, gets handed to a language model for a second pass.
